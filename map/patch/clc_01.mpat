@@ -1,0 +1,636 @@
+#define .button_pressed *MapVar[0]
+#define .onesdigit *MapVar[1]
+#define .tensdigit *MapVar[2]
+#define .hundredsdigit *MapVar[3]
+#define .thousandsdigit *MapVar[4]
+
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Exec  $Script_SetupMusic
+	Exec  $Script_EnterMap
+    Exec $Script_SetupCalc
+	Return
+	End
+}
+
+#new:Script $Script_SetupCalc
+{
+Set .onesdigit 0
+Set .tensdigit 0
+Set .hundredsdigit 0
+Set .thousandsdigit 0
+Bind $Button_0 .Trigger:FloorTouch ~Collider:0_Collider 0 1
+Bind $Button_1 .Trigger:FloorTouch ~Collider:1_Collider 0 1
+Bind $Button_2 .Trigger:FloorTouch ~Collider:2_Collider 0 1
+Bind $Button_3 .Trigger:FloorTouch ~Collider:3_Collider 0 1
+Bind $Button_4 .Trigger:FloorTouch ~Collider:4_Collider 0 1
+Bind $Button_5 .Trigger:FloorTouch ~Collider:5_Collider 0 1
+Bind $Button_6 .Trigger:FloorTouch ~Collider:6_Collider 0 1
+Bind $Button_7 .Trigger:FloorTouch ~Collider:7_Collider 0 1
+Bind $Button_8 .Trigger:FloorTouch ~Collider:8_Collider 0 1
+Bind $Button_9 .Trigger:FloorTouch ~Collider:9_Collider 0 1
+Bind $Button_Clear .Trigger:FloorTouch ~Collider:Clear_Collider 0 1
+Bind $Reset_Buttons .Trigger:FloorTouch ~Collider:CalcCollider 0 1
+Exec $Script_DisplayNumber
+Return
+End
+}
+
+#new:Script $Script_DisplayNumber{
+Switch .onesdigit
+Case == 0
+Call EnableGroup ( ~Model:01_0 .True )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 1
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .True )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 2
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .True )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 3
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .True )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 4
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .True )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 5
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .True )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 6
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .True )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 7
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .True )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 8
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .True )
+Call EnableGroup ( ~Model:01_9 .False )
+Case == 9
+Call EnableGroup ( ~Model:01_0 .False )
+Call EnableGroup ( ~Model:01_1 .False )
+Call EnableGroup ( ~Model:01_2 .False )
+Call EnableGroup ( ~Model:01_3 .False )
+Call EnableGroup ( ~Model:01_4 .False )
+Call EnableGroup ( ~Model:01_5 .False )
+Call EnableGroup ( ~Model:01_6 .False )
+Call EnableGroup ( ~Model:01_7 .False )
+Call EnableGroup ( ~Model:01_8 .False )
+Call EnableGroup ( ~Model:01_9 .True )
+EndSwitch
+
+Switch .tensdigit
+Case == 0
+Call EnableGroup ( ~Model:02_0 .True )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 1
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .True )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 2
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .True )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 3
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .True )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 4
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .True )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 5
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .True )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 6
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .True )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 7
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .True )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 8
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .True )
+Call EnableGroup ( ~Model:02_9 .False )
+Case == 9
+Call EnableGroup ( ~Model:02_0 .False )
+Call EnableGroup ( ~Model:02_1 .False )
+Call EnableGroup ( ~Model:02_2 .False )
+Call EnableGroup ( ~Model:02_3 .False )
+Call EnableGroup ( ~Model:02_4 .False )
+Call EnableGroup ( ~Model:02_5 .False )
+Call EnableGroup ( ~Model:02_6 .False )
+Call EnableGroup ( ~Model:02_7 .False )
+Call EnableGroup ( ~Model:02_8 .False )
+Call EnableGroup ( ~Model:02_9 .True )
+    EndSwitch
+
+ Switch .hundredsdigit
+ Case == 0
+    Call EnableGroup ( ~Model:03_0 .True )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 1
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .True )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 2
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .True )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 3
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .True )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 4
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .True )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 5
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .True )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 6
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .True )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 7
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .True )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 8
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .True )
+    Call EnableGroup ( ~Model:03_9 .False )
+ Case == 9
+    Call EnableGroup ( ~Model:03_0 .False )
+    Call EnableGroup ( ~Model:03_1 .False )
+    Call EnableGroup ( ~Model:03_2 .False )
+    Call EnableGroup ( ~Model:03_3 .False )
+    Call EnableGroup ( ~Model:03_4 .False )
+    Call EnableGroup ( ~Model:03_5 .False )
+    Call EnableGroup ( ~Model:03_6 .False )
+    Call EnableGroup ( ~Model:03_7 .False )
+    Call EnableGroup ( ~Model:03_8 .False )
+    Call EnableGroup ( ~Model:03_9 .True )
+     EndSwitch
+
+Switch .thousandsdigit
+Case == 0
+    Call EnableGroup ( ~Model:04_0 .True )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 1
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .True )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 2
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .True )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 3
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .True )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 4
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .True )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 5
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .True )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 6
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .True )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 7
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .True )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 8
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .True )
+    Call EnableGroup ( ~Model:04_9 .False )
+Case == 9
+    Call EnableGroup ( ~Model:04_0 .False )
+    Call EnableGroup ( ~Model:04_1 .False )
+    Call EnableGroup ( ~Model:04_2 .False )
+    Call EnableGroup ( ~Model:04_3 .False )
+    Call EnableGroup ( ~Model:04_4 .False )
+    Call EnableGroup ( ~Model:04_5 .False )
+    Call EnableGroup ( ~Model:04_6 .False )
+    Call EnableGroup ( ~Model:04_7 .False )
+    Call EnableGroup ( ~Model:04_8 .False )
+    Call EnableGroup ( ~Model:04_9 .True )
+    EndSwitch
+
+    Return
+    End
+    }
+
+#new:Script $Shift_Left{
+Set .thousandsdigit .hundredsdigit
+Set .hundredsdigit .tensdigit
+Set .tensdigit .onesdigit
+Return
+End
+}
+
+#new:Script $Reset_Buttons{
+Set .button_pressed 0
+    Return
+    End
+}
+
+#new:Script $Button_0{
+    If .button_pressed == 0
+    ExecWait  $Shift_Left
+    Set .onesdigit 0
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_1{
+    If .button_pressed == 0
+    ExecWait $Shift_Left
+    Set .onesdigit 1
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_2{
+    If .button_pressed == 0
+    ExecWait $Shift_Left
+    Set .onesdigit 2
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_3{
+    If .button_pressed == 0
+    ExecWait  $Shift_Left
+    Set .onesdigit 3
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_4{
+    If .button_pressed == 0
+    ExecWait $Shift_Left
+    Set .onesdigit 4
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_5{
+    If .button_pressed == 0
+    ExecWait $Shift_Left
+    Set .onesdigit 5
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_6{
+    If .button_pressed == 0
+    ExecWait  $Shift_Left
+    Set .onesdigit 6
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_7{
+    If .button_pressed == 0
+    ExecWait  $Shift_Left
+    Set .onesdigit 7
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_8{
+    If .button_pressed == 0
+    ExecWait $Shift_Left
+    Set .onesdigit 8
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_9{
+    If .button_pressed == 0
+    ExecWait $Shift_Left
+    Set .onesdigit 9
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_Clear{
+    If .button_pressed == 0
+    Set .onesdigit 0
+    Set .tensdigit 0
+    Set .hundredsdigit 0
+    Set .thousandsdigit 0
+    Set .button_pressed 1
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}

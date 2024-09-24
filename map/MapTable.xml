@@ -568,6 +568,9 @@
 		<Map name="tst_13" nickname="Partners and Shockwave"/>
 		<Map name="tst_20" nickname="Pipes Gallery"/>
 	</Area>
+	<Area name="clc" nickname="Calculator">
+		<Map name="clc_01"/>
+	</Area>
 	<Resource name="mac_tex" compressed="false"/>
 	<Resource name="tik_tex" compressed="false"/>
 	<Resource name="kgr_tex" compressed="false"/>
@@ -596,6 +599,7 @@
 	<Resource name="end_tex" compressed="false"/>
 	<Resource name="mgm_tex" compressed="false"/>
 	<Resource name="gv__tex" compressed="false"/>
+	<Resource name="clc_tex" compressed="false"/>
 	<Resource name="kmr_bg" compressed="true"/>
 	<Resource name="nok_bg" compressed="true"/>
 	<Resource name="sbk_bg" compressed="true"/>
