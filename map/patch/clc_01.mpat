@@ -1,8 +1,19 @@
+#define .plus 4
+#define .minus 1
+#define .multiply 2
+#define .divide 3
+
+
 #define .button_pressed *MapVar[0]
 #define .onesdigit *MapVar[1]
 #define .tensdigit *MapVar[2]
 #define .hundredsdigit *MapVar[3]
 #define .thousandsdigit *MapVar[4]
+#define .solution *MapVar[5]
+#define .operator *MapVar[6]
+#define .operand1 *MapVar[7]
+#define .operand2 *MapVar[8]
+#define .remaining *MapVar[9]
 
 @ $Script_Main
 {
@@ -14,10 +25,25 @@
 	Exec  $Script_SetupMusic
 	Exec  $Script_EnterMap
     Exec $Script_SetupCalc
+    Exec $numloop
 	Return
 	End
 }
-
+#new:Script $numloop{
+    Loop
+        Wait 1`
+        Set *Debug[0] .solution
+        Set *Debug[1] .operator
+        Set *Debug[2] .operand1 
+        Set *Debug[3] .operand2
+        PrintVar *Debug[0]
+        PrintVar *Debug[1]
+        PrintVar *Debug[2]
+        PrintVar *Debug[3]
+    EndLoop
+    Return
+    End
+}
 #new:Script $Script_SetupCalc
 {
 Set .onesdigit 0
@@ -34,6 +60,11 @@ Bind $Button_6 .Trigger:FloorTouch ~Collider:6_Collider 0 1
 Bind $Button_7 .Trigger:FloorTouch ~Collider:7_Collider 0 1
 Bind $Button_8 .Trigger:FloorTouch ~Collider:8_Collider 0 1
 Bind $Button_9 .Trigger:FloorTouch ~Collider:9_Collider 0 1
+Bind $Button_Plus .Trigger:FloorTouch ~Collider:Plus_Collider 0 1
+Bind $Button_Minus .Trigger:FloorTouch ~Collider:Minus_Collider 0 1
+Bind $Button_Equal .Trigger:FloorTouch ~Collider:Equal_Collider 0 1
+Bind $Button_Divide .Trigger:FloorTouch ~Collider:Divide_Collider 0 1
+Bind $Button_Multiply .Trigger:FloorTouch ~Collider:Multiply_Collider 0 1
 Bind $Button_Clear .Trigger:FloorTouch ~Collider:Clear_Collider 0 1
 Bind $Reset_Buttons .Trigger:FloorTouch ~Collider:CalcCollider 0 1
 Exec $Script_DisplayNumber
@@ -513,10 +544,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_0{
-    If .button_pressed == 0
-    ExecWait  $Shift_Left
-    Set .onesdigit 0
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 0
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -524,10 +562,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_1{
-    If .button_pressed == 0
-    ExecWait $Shift_Left
-    Set .onesdigit 1
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 1
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -535,10 +580,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_2{
-    If .button_pressed == 0
-    ExecWait $Shift_Left
-    Set .onesdigit 2
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 2
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -546,10 +598,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_3{
-    If .button_pressed == 0
-    ExecWait  $Shift_Left
-    Set .onesdigit 3
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 3
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -557,10 +616,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_4{
-    If .button_pressed == 0
-    ExecWait $Shift_Left
-    Set .onesdigit 4
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 4
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -568,10 +634,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_5{
-    If .button_pressed == 0
-    ExecWait $Shift_Left
-    Set .onesdigit 5
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 5
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -579,10 +652,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_6{
-    If .button_pressed == 0
-    ExecWait  $Shift_Left
-    Set .onesdigit 6
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait  $Shift_Left
+            Set .onesdigit 6
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -590,10 +670,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_7{
-    If .button_pressed == 0
-    ExecWait  $Shift_Left
-    Set .onesdigit 7
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 7
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -601,10 +688,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_8{
-    If .button_pressed == 0
-    ExecWait $Shift_Left
-    Set .onesdigit 8
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 8
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -612,10 +706,17 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_9{
-    If .button_pressed == 0
-    ExecWait $Shift_Left
-    Set .onesdigit 9
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            ExecWait $Shift_Left
+            Set .onesdigit 9
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
@@ -623,14 +724,252 @@ Set .button_pressed 0
 }
 
 #new:Script $Button_Clear{
-    If .button_pressed == 0
-    Set .onesdigit 0
-    Set .tensdigit 0
-    Set .hundredsdigit 0
-    Set .thousandsdigit 0
-    Set .button_pressed 1
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            Set .onesdigit 0
+            Set .tensdigit 0
+            Set .hundredsdigit 0
+            Set .thousandsdigit 0
+            Set .operator 0
+            Set .operand1 0
+            Set .operand2 0
+            Set .solution 0
+            Exec $Script_DisplayNumber
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
+    EndIf
+    Return
+    End
+}
+
+
+#new:Script $Button_Plus{
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            Set *MapVar[7] = ((*MapVar[1]) + (*MapVar[2] * 10`) + (*MapVar[3] * 100`) + (*MapVar[4] * 1000`))
+            Set .operator .plus
+            Set .onesdigit 0
+            Set .tensdigit 0
+            Set .hundredsdigit 0
+            Set .thousandsdigit 0
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
     Exec $Script_DisplayNumber
     EndIf
     Return
     End
+}
+
+#new:Script $Button_Minus{
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            Set *MapVar[7] = ((*MapVar[1]) + (*MapVar[2] * 10`) + (*MapVar[3] * 100`) + (*MapVar[4] * 1000`))
+            Set .operator .minus
+            Set .onesdigit 0
+            Set .tensdigit 0
+            Set .hundredsdigit 0
+            Set .thousandsdigit 0
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_Multiply{
+    If .button_pressed == 0 
+    Call GetPlayerActionState ( *Var0 )
+    If  *Var0  ==  .ActionState:GroundPound % E
+        Thread
+        Set .button_pressed 1
+        Set *MapVar[7] = ((*MapVar[1]) + (*MapVar[2] * 10`) + (*MapVar[3] * 100`) + (*MapVar[4] * 1000`))
+        Set .operator .multiply
+        Set .onesdigit 0
+        Set .tensdigit 0
+        Set .hundredsdigit 0
+        Set .thousandsdigit 0
+        Wait 30`
+        Set .button_pressed 0
+        EndThread
+    EndIf
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_Divide{
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Thread
+            Set .button_pressed 1
+            Set *MapVar[7] = ((*MapVar[1]) + (*MapVar[2] * 10`) + (*MapVar[3] * 100`) + (*MapVar[4] * 1000`))
+            Set .operator .divide
+            Set .onesdigit 0
+            Set .tensdigit 0
+            Set .hundredsdigit 0
+            Set .thousandsdigit 0
+            Wait 30`
+            Set .button_pressed 0
+            EndThread
+        EndIf
+    Exec $Script_DisplayNumber
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Button_Equal{
+    Set *MapVar[8] = ((*MapVar[1]) + (*MapVar[2] * 10`) + (*MapVar[3] * 100`) + (*MapVar[4] * 1000`))
+    If .button_pressed == 0 
+        Call GetPlayerActionState ( *Var0 )
+        If  *Var0  ==  .ActionState:GroundPound % E
+            Set .button_pressed 1
+            ExecWait $Maths
+            ExecWait $VariableExtract
+            Exec $Script_DisplayNumber
+            Wait 30`
+            Set .button_pressed 0
+            Set .operator 0
+        EndIf
+    %Call $Get4DigitNumber (.solution .onesdigit .tensdigit .hundredsdigit .thousandsdigit)
+    EndIf
+    Return
+    End
+}
+#new:Script $Maths{
+    Switch .operator
+    Case == .plus 
+    Set *MapVar[5] = (*MapVar[7] + *MapVar[8])
+    Case == .minus
+    Set *MapVar[5] = (*MapVar[7] - *MapVar[8])
+    Case == .multiply
+    Set *MapVar[5] = (*MapVar[7] * *MapVar[8])
+    Case == .divide
+        If *MapVar[8] != 0
+        Set *MapVar[5] = (*MapVar[7] / *MapVar[8]) 
+        Else
+        Exec $DivideByZero 
+        EndIf
+    Default
+    EndSwitch
+    Return
+    End
+}
+#new:Script $DivideByZero{
+Call DisablePlayerInput ( .True )
+Wait 10`
+Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+Add *Var1 25`
+Call ShowEmote ( .Npc:Player .Emote:Question -45` 30` .Npc:Player *Var0 *Var1 *Var2 5` )
+Call  PlaySound     ( 000020E8 )
+Wait 30`
+Call PlaySound ( 000001E2  )
+Thread
+Call ShakeCam ( 0 0 40` *Fixed[0.3] )
+EndThread
+Call SetPlayerAnimation ( 00010023)
+Thread 
+Set *Var0 0
+Loop 40`
+Sub *Var0 6`
+Wait 1`
+Call TranslateModel ( ~Model:MeteorBall *Var0 *Var0 0 )
+EndLoop
+EndThread
+Wait 40`
+Set *MapVar[5] = (*MapVar[7] / *MapVar[8] )
+Return
+End
+}
+
+#new:Script $VariableExtract{
+Set *MapVar[4] = ((*MapVar[5]) / 1000`)
+Set *MapVar[9] = (*MapVar[5] - (*MapVar[4] * 1000`))
+Set *MapVar[3] = ((*MapVar[9]) / 100`)
+Set *MapVar[9] = (*MapVar[9] - (*MapVar[3] * 100`))
+Set *MapVar[2] = ((*MapVar[9]) / 10`)
+Set *MapVar[9] = (*MapVar[9] - (*MapVar[2] * 10`))
+Set *MapVar[1] = *MapVar[9]
+Return
+End
+}
+
+%takes 5 args:
+%in: MapVar
+%out Var0, Var1, Var2, Var3
+%Ex: Call $Get4DigitNumber(*MapVar0, *Var0 *Var1 *Var2 *Var3)
+
+#new:ASCII $Formatter {
+    "%d"
+}
+
+#new:Function $Get4DigitNumber {
+    ADDIU sp, sp, -40
+    SW ra, 0010 (sp)
+    SW s0, 0014 (sp)
+    SW s1, 0018 (sp)
+    SW s2, 001C (sp)
+    %0x20 through 0x30 is str buffer
+    ADDU s0, r0, a0
+    LW s1, 000C (a0) %arg pointer list
+    ADDIU s2, sp, 20 %string of 16 length
+
+    JAL ~Func:get_variable
+     LW a1, 0000 (s1) %load arg index 0 (map var)
+
+    LI a1, $Formatter
+    ADDU a2, v0, r0
+    JAL ~Func:sprintf
+     ADDU a0, s2, r0
+
+    %s2 now holds the number as a string
+    LBU a2, 0000 (s2) %load first digit
+    LW a1, 0004 (s1)
+    ADDU a0, s0, r0
+    JAL ~Func:set_variable
+    ADDIU a2, a2, -48` %ascii -> int
+
+    LBU a2, 0001 (s2) %load first digit
+    LW a1, 0008 (s1)
+    ADDU a0, s0, r0
+    JAL ~Func:set_variable
+    ADDIU a2, a2, -48` %ascii -> int
+
+    LBU a2, 0002 (s2) %load first digit
+    LW a1, 000C (s1)
+    ADDU a0, s0, r0
+    JAL ~Func:set_variable
+    ADDIU a2, a2, -48` %ascii -> int
+
+    LBU a2, 0003 (s2) %load first digit
+    LW a1, 0010 (s1)
+    ADDU a0, s0, r0
+    JAL ~Func:set_variable
+    ADDIU a2, a2, -48` %ascii -> int
+
+    LW ra, 0010 (sp)
+    LW s0, 0014 (sp)
+    LW s1, 0018 (sp)
+    LW s2, 001C (sp)
+    ORI v0, r0, 2
+    JR RA
+    ADDIU sp, sp, 40
 }
